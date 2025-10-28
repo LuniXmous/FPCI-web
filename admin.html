@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4" style="background-color: #f5f3f1">
+  <h1>Edit Konten</h1>
+  <div class="card" style="width: max;">
+    <div class="card-body">
+      <!-- Update Carousel & Video -->
+      <form method="POST" action="/update_content" enctype="multipart/form-data" class="mb-1">
+        <h3>Upload Gambar Carousel Utama</h3>
+        <div class="mb-2"><label>Carousel 1:</label><input type="file" name="hero_carousel1" class="form-control"></div>
+        <div class="mb-2"><label>Carousel 2:</label><input type="file" name="hero_carousel2" class="form-control"></div>
+        <div class="mb-2"><label>Carousel 3:</label><input type="file" name="hero_carousel3" class="form-control"></div>
+        <button type="submit" class="btn btn-primary mt-3">Simpan Perubahan</button>
+   </div>
+  </div>
+  <div class="card mt-4" style="width: max;">
+    <div class="card-body">
+        <h1>About US</h1>
+        
+        <label>Upload Video About Us:</label>
+        <input type="file" name="video_url" class="form-control" accept="video/*"><br>
+
+        <label>Deskripsi About Us:</label>
+        <textarea name="about_paragraph1" class="form-control">{{ data.about_paragraph1 }}</textarea><br>
+
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mt-4" style="width: max;">
+    <div class="card-body">
+      <!-- Update Banner 2 -->
+      <h3>Upload Gambar Banner 2</h3>
+      <form id="bannerForm" method="POST" enctype="multipart/form-data" action="/update_banner" class="mb-1">
+        <label>Banner 2:</label>
+        <input type="file" name="hero_carousel2" accept="image/*" class="form-control">
+        <button type="submit" class="btn btn-primary mt-4">Simpan Banner</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mt-4" style="width: max;">
+    <div class="card-body">
+      <!-- Tambah Event Baru -->
+      <h3>Tambah Event Baru</h3>
+      <form id="eventForm" method="POST" enctype="multipart/form-data" action="/add_event" class="mb-1">
+        <div class="mb-2">
+          <label>Judul Event:</label>
+          <input type="text" name="title" required class="form-control">
+        </div>
+        <div class="mb-2">
+          <label>Deskripsi Singkat Event:</label>
+          <textarea name="description" required class="form-control"></textarea>
+        </div>
+        <div class="mb-2">
+          <label>Gambar Event:</label>
+          <input type="file" name="image" accept="image/*" required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Tambah Event</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mt-4" style="width: max;">
+    <div class="card-body">
+        <h3>Tambah Latest Opinion</h3>
+        <form id="opinionForm" method="POST" action="/add_opinion">
+          <div class="mb-2">
+            <label>Link Artikel:</label>
+            <input type="url" name="url" required class="form-control mt-3" placeholder="https://...">
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Tambah Opinion</button>
+        </form>
+    </div>
+  </div>
+
+  <script>
+  document.getElementById("eventForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const res = await fetch("/add_event", { method: "POST", body: formData });
+    if (res.ok) alert("Event berhasil ditambahkan!");
+    else alert("Gagal menambah event");
+  });
+
+  document.getElementById("bannerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const res = await fetch("/update_banner", { method: "POST", body: formData });
+    if (res.ok) alert("Banner berhasil diupdate!");
+    else alert("Gagal mengupdate banner");
+  });
+
+  document.getElementById("opinionForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const res = await fetch("/add_opinion", { method: "POST", body: formData });
+  if (res.ok) {
+    const data = await res.json();
+    alert("Opinion berhasil ditambahkan!\nJudul: " + data.data.title);
+  } else {
+    alert("Gagal menambahkan opinion.");
+  }
+});
+  </script>
+
+</body>
+</html>
