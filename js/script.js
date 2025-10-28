@@ -2,18 +2,18 @@
 const content = {
     events: [
         {
-            title: "dadaa",
-            description: "adaaad",
-            image: "images/IMG-20240304-143805.jpg"
+            title: "Open Registration!",
+            description: "12-21 April Jangan Sampai kelewatan Ya!",
+            image: "images/feeds oprec.png"
         },
         {
-            title: "Join Us",
-            description: "JOINNNN",
+            title: "Join Us!",
+            description: "Extend! Perpanjangan Oprec dari 21-27 April Jangan kelewatan kesempatan ke dua ini!",
             image: "images/feeds oprec extend.png"
         },
         {
-            title: "JOINNN",
-            description: "joinnnnn snsnsns",
+            title: "Gabung!",
+            description: "Gabung dengan Kami Mulai dari 12-21 April!",
             image: "images/feeds oprec.png"
         }
     ],
