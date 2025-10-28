@@ -166,4 +166,14 @@ document.addEventListener("DOMContentLoaded", function () {
             typeWriter();
         }, 1000);
     }
+    // Burger menu toggle
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (burger) {
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navLinks.classList.toggle('show');
+        });
+    }
 });
